@@ -12,7 +12,7 @@ const routes = [
             },
             {
                 path: "/apply",
-                element: lazy(() => import("../view/pages/Apply/Apply")),
+                element: lazy(() => import("../view/pages/Jobs/Jobs")),
             },
 
         ]
