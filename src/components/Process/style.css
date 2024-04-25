@@ -1,0 +1,27 @@
+/* Example styles to enhance the appearance */
+.process-container {}
+
+.job-pipeline-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 20px 40px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.job-pipeline-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Example styles for disabled buttons */
+.job-pipeline-button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Example styles for active filter */
+.job-pipeline-button.active-filter {
+    background-color: #4caf50;
+    color: white;
+}

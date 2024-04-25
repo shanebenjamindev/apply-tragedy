@@ -4,17 +4,12 @@ import api from '../apiUltils'
 export const fetchJobs = () => {
     return (dispatch) => {
         dispatch(fetchJobsRequest)
-console.log("aaaa");
         api.get('/jobs/get-all')
             .then((result) => {
-                console.log(result.data);
-                // if (result.data.statusCode === 200) {
-                // dispatch(fetchJobsSucess(result.data.content))
-                // }
+                dispatch(fetchJobsSucess(result.data))
             })
             .catch((error) => {
-                console.log(error);
-                // dispatch(fetchJobsFail(error.response.data))
+                dispatch(fetchJobsFail(error.response.data))
             })
     }
 }
@@ -22,3 +17,16 @@ console.log("aaaa");
 const fetchJobsRequest = () => ({ type: actions.FETCH_JOBS_REQUEST })
 const fetchJobsSucess = (data) => ({ type: actions.FETCH_JOBS_SUCCESS, payload: data })
 const fetchJobsFail = (error) => ({ type: actions.FETCH_JOBS_FAILURE, payload: error })
+
+export const actDeleteJob = (id) => {
+    return (dispatch) => {
+        api.delete(`/jobs/delete/${id}`)
+            .then(() => {
+                dispatch({ type: actions.DELETE_JOB })
+                dispatch(fetchJobs())
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}

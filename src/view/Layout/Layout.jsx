@@ -5,10 +5,14 @@ import Header from '../../components/Header/Header';
 export default function Content() {
 
     return (
-        <main>
-            <Header />
-            <Outlet />
-        </main>
+        <>
+            <header>
+                <Header />
+            </header>
+            <main>
+                <Outlet />
+            </main>
+        </>
     )
 
 }
