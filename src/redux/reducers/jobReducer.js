@@ -32,8 +32,7 @@ const jobReducer = (state = initialState, action) => {
     case actions.DELETE_JOB:
       return { ...state }
 
-    //   case types.ADD_JOB:
-    //   return { ...state, data: [...state.jobs, action.payload] };
+
     // case types.UPDATE_JOB:
     //   return {
     //     ...state,

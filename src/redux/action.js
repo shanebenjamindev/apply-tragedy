@@ -6,7 +6,8 @@ export const fetchJobs = () => {
         dispatch(fetchJobsRequest()); // Corrected dispatch function call
         api.get('/jobs/get-all')
             .then((result) => {
-                dispatch(fetchJobsSuccess(result.data));
+                const { data } = result.data
+                dispatch(fetchJobsSuccess(data))
             })
             .catch((error) => {
                 dispatch(fetchJobsFail(error.response.data));
@@ -36,14 +37,12 @@ export const actAddJob = (newJob) => {
     return (dispatch) => {
         api.post(`/jobs/create`, newJob)
             .then((result) => {
-                console.log(result);
-                // Dispatch appropriate actions if needed
-                // dispatch({ type: actions.ADD_JOB });
-                // dispatch(fetchJobs());
+                dispatch(fetchJobs());
+                dispatch({ type: actions.ADD_JOB });
+                alert(result.data.message);
             })
             .catch((error) => {
-                console.error(error.response.data); // Log error to console
-                // Display error message to user
+                console.error(error.response.data);
             });
     };
 };

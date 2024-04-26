@@ -29,6 +29,13 @@ export default function JobComponent() {
         dispatch(actDeleteJob(id))
     }
 
+    const handleOnChange = (e) => {
+        const { name, value } = e.target
+        setNewJob({
+            ...newJob,
+            [name]: value,
+        })
+    }
     const onSubmitJob = () => {
 
         dispatch(actAddJob(newJob))
@@ -45,7 +52,7 @@ export default function JobComponent() {
         {
             title: 'Position',
             dataIndex: 'position',
-            key: 'job',
+            key: 'position',
         },
         {
             title: 'Address',
@@ -57,9 +64,11 @@ export default function JobComponent() {
             dataIndex: 'status',
             key: 'status',
             render: (_, record) => (
-                <Select defaultValue={record.status}>
-                    <Option value={record.status}>{record.status}</Option>
-                </Select>
+                record.status && (
+                    <Select defaultValue={record.status}>
+                        <Option value={record.status}>{record.status}</Option>
+                    </Select>
+                )
             ),
         },
         {
@@ -76,10 +85,7 @@ export default function JobComponent() {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
-                <Button
-                    danger
-                    onClick={() => handleDeleteJob(record._id)}
-                >
+                <Button danger onClick={() => handleDeleteJob(record._id)}>
                     Delete
                 </Button>
             ),
@@ -93,20 +99,20 @@ export default function JobComponent() {
 
             <div className="mb-4">
                 <Form form={form} onFinish={onSubmitJob} layout="">
-                    <Form.Item name="position">
-                        <Input placeholder="Position" onChange={(e) => setNewJob({ ...newJob, position: e.target.value })} />
+                    <Form.Item >
+                        <Input name="position" placeholder="Position" onChange={handleOnChange} />
                     </Form.Item>
-                    <Form.Item name="company">
-                        <Input placeholder="Company" onChange={(e) => setNewJob({ ...newJob, company: e.target.value })} />
+                    <Form.Item >
+                        <Input name="company" placeholder="Company" onChange={handleOnChange} />
                     </Form.Item>
-                    <Form.Item name="status">
-                        <Input placeholder="Status" onChange={(e) => setNewJob({ ...newJob, status: e.target.value })} />
+                    <Form.Item >
+                        <Input name="status" placeholder="Status" onChange={handleOnChange} />
                     </Form.Item>
-                    <Form.Item name="address">
-                        <Input placeholder="Address" onChange={(e) => setNewJob({ ...newJob, address: e.target.value })} />
+                    <Form.Item >
+                        <Input name="address" placeholder="Address" onChange={handleOnChange} />
                     </Form.Item>
-                    <Form.Item name="url">
-                        <Input placeholder="URL" onChange={(e) => setNewJob({ ...newJob, url: e.target.value })} />
+                    <Form.Item >
+                        <Input name="url" placeholder="URL" onChange={handleOnChange} />
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" loading={loading}>
@@ -117,7 +123,9 @@ export default function JobComponent() {
 
             </div>
             {jobs ? (
-                <Table dataSource={jobs} columns={columns} rowKey={"_id"} />
+                <div className='' style={{overflow: "auto"}}>
+                    <Table dataSource={jobs} columns={columns} rowKey={"_id"} />
+                </div>
             ) : (
                 <Loading />
             )}
