@@ -7,7 +7,6 @@ export default function Jobs() {
     const user = GetUser();
     return (
         <div className='w-8/12 m-auto py-5'>
-            <Process />
             <JobComponent user={user} />
         </div>
     )
