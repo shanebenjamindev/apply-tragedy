@@ -114,35 +114,10 @@ export default function JobComponent() {
     ];
 
     return (
-        <section>
-            <div className="process-container hidden md:flex justify-around">
-                <button className="job-pipeline-button" onClick={() => handleFilter('Bookmarked')}>
-                    <div className="section-value h4">{countJobs('Bookmarked')}</div>
-                    <div className="section-label">Bookmarked</div>
-                </button>
-                <button className="job-pipeline-button" onClick={() => handleFilter('Applying')}>
-                    <div className="section-value h4">{countJobs('Applying')}</div>
-                    <div className="section-label">Applying</div>
-                </button>
-                <button className="job-pipeline-button" onClick={() => handleFilter('Interview')}>
-                    <div className="section-value h4">{countJobs('Interview')}</div>
-                    <div className="section-label">Interview</div>
-                </button>
-                <button className="job-pipeline-button" onClick={() => handleFilter('Pending')}>
-                    <div className="section-value h4">{countJobs('Pending')}</div>
-                    <div className="section-label">Pending</div>
-                </button>
-                <button className="job-pipeline-button" onClick={() => handleFilter('Accepted')}>
-                    <div className="section-value h4">{countJobs('Accepted')}</div>
-                    <div className="section-label">Accepted</div>
-                </button>
-                <button className="job-pipeline-button" onClick={() => handleFilter('Closed')}>
-                    <div className="section-value h4">{countJobs('Closed')}</div>
-                    <div className="section-label">Closed</div>
-                </button>
-            </div>
+        <section className=''>
 
-            <div>
+
+            <div className='flex md:hidden'>
                 <Select className='w-2/5' placeholder="Status" onChange={(e) => handleFilter(e.target.value)}>
                     <Option value="Bookmarked">Bookmarked</Option>
                     <Option value="Applying">Applying</Option>
@@ -152,10 +127,36 @@ export default function JobComponent() {
                     <Option value="Closed">Closed</Option>
                 </Select>
             </div>
-            <h2 className="text-2xl font-bold mb-4">Saved Jobs</h2>
 
 
-            <div className="mb-4">
+            <div className="mb-4 p-3">
+                <div className="hidden md:flex justify-around">
+                    <button className="job-pipeline-button" onClick={() => handleFilter('Bookmarked')}>
+                        <div className="section-value h4">{countJobs('Bookmarked')}</div>
+                        <div className="section-label">Bookmarked</div>
+                    </button>
+                    <button className="job-pipeline-button" onClick={() => handleFilter('Applying')}>
+                        <div className="section-value h4">{countJobs('Applying')}</div>
+                        <div className="section-label">Applying</div>
+                    </button>
+                    <button className="job-pipeline-button" onClick={() => handleFilter('Interview')}>
+                        <div className="section-value h4">{countJobs('Interview')}</div>
+                        <div className="section-label">Interview</div>
+                    </button>
+                    <button className="job-pipeline-button" onClick={() => handleFilter('Pending')}>
+                        <div className="section-value h4">{countJobs('Pending')}</div>
+                        <div className="section-label">Pending</div>
+                    </button>
+                    <button className="job-pipeline-button" onClick={() => handleFilter('Accepted')}>
+                        <div className="section-value h4">{countJobs('Accepted')}</div>
+                        <div className="section-label">Accepted</div>
+                    </button>
+                    <button className="job-pipeline-button" onClick={() => handleFilter('Closed')}>
+                        <div className="section-value h4">{countJobs('Closed')}</div>
+                        <div className="section-label">Closed</div>
+                    </button>
+                </div>
+                <h2 className="text-2xl font-bold mb-4">Add Jobs</h2>
                 <Form form={form} onFinish={onSubmitJob} layout="">
                     <Form.Item name="position" rules={[{ required: true, message: 'Please input position!' }]}>
                         <Input placeholder="Position" />
@@ -186,17 +187,18 @@ export default function JobComponent() {
                     </Form.Item>
                 </Form>
 
-            </div>
-            {
-                jobs ? (
-                    <div style={{ overflow: "auto" }}>
-                        <Table dataSource={filteredJobs} columns={columns} className='text-center' rowKey={"_id"} />
-                    </div>
+                {
+                    jobs ? (
+                        <div style={{ overflow: "auto" }}>
+                            <Table dataSource={filteredJobs} columns={columns} className='text-center' rowKey={"_id"} />
+                        </div>
 
-                ) : (
-                    <Loading />
-                )
-            }
+                    ) : (
+                        <Loading />
+                    )
+                }
+            </div>
+
         </section >
     );
 }

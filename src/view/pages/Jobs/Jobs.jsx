@@ -6,9 +6,7 @@ import Process from '../../../components/Process/Process';
 export default function Jobs() {
     const user = GetUser();
     return (
-        <div className='w-8/12 m-auto py-5'>
-            <JobComponent user={user} />
-        </div>
+        <JobComponent user={user} />
     )
 
 }

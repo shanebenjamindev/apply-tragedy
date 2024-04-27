@@ -78,8 +78,8 @@ export default function Login() {
                         </button>
                     </div>
                 </div>
-                <div className='mt-2 text-blue-300 hover:text-blue-700 transition-colors duration-500'>
-                    <a href="/">back to home</a>
+                <div className='mt-2 text-blue-500 hover:text-blue-700 transition-colors duration-500'>
+                    <a href="/">this function will be available soon, back to home</a>
                 </div>
             </form>
         </section>

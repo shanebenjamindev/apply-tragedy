@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Header() {
 
     return (
-        <div className='w-screen bg-gray-800 p-5 text-white'>
+        <div className='w-full bg-gray-800 p-5 text-white'>
             <nav className='flex justify-between'>
                 <div>Application Tragedy</div>
                 <ul className='flex gap-3'>
