@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import userData from '../../../../public/data/userData.json';
+import userData from '../../../data/userData.json';
 
 export default function Login() {
-
-
 
     const [user, setUser] = useState(
         {
