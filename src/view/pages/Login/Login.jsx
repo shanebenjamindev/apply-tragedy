@@ -1,87 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button, Typography, Alert } from 'antd';
 import userData from '../../../data/userData.json';
+import { useDispatch } from 'react-redux';
+import { actSignIn } from '../../../redux/action';
+import { useNavigate } from 'react-router-dom';
+import { GetUser } from '../../../hooks/userHooks';
+
+const { Title } = Typography;
 
 export default function Login() {
+    const [form] = Form.useForm();
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const [user, setUser] = useState(
-        {
-            email: "",
-            password: "",
+    const user = GetUser()
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
         }
-    );
-    const [error, setError] = useState('');
+    }, [user]);
 
-    const handleOnChange = (e) => {
-        const { name, value } = e.target;
-        setUser(
-            {
-                ...user,
-                [name]: value,
-            }
-        )
+
+    const onFinish = (values) => {
+        dispatch(actSignIn(values, navigate))
     };
 
-
-    const login = () => {
-
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        console.log(userData);
-
-        // if (validUser) {
-        //     console.log("success");
-        //     // Redirect to a protected route after successful login
-        // } else {
-        //     setError('Invalid username or password');
-        // }
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
     };
 
     return (
-        <section className='flex h-screen justify-center items-center w-screen'>
-            <form className='text-center rounded' onSubmit={handleSubmit}>
-                <h2 className='mb-3'>
-                    Login
-                </h2>
-                <div className='flex gap-3'>
-                    <div>
-                        <div>
-                            <label className='mr-5'>Username</label>
-                            <input
-                                className='border-b-2'
-                                placeholder='email to login'
-                                type='text'
-                                name="email"
-                                onChange={handleOnChange}
-                            />
-                        </div>
-                        <div className='mt-2'>
-                            <label className='mr-5'>Password</label>
-                            <input
-                                className='border-b-2'
-                                placeholder='password'
-                                type='password'
-                                name="password"
-                                onChange={handleOnChange}
-                            />
-                        </div>
-                        {error && <div className="text-red-500 mt-2">{error}</div>}
-                    </div>
-                    <div className='flex items-center'>
-                        <button
-                            type="submit"
-                            className='h-full transition duration-500 ease-in-out bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded'
-                        >
-                            Login
-                        </button>
-                    </div>
+        <section className='flex h-screen justify-center items-center w-full'>
+            <a href="/" className="fixed top-3 left-3 text-blue-500 hover:text-blue-700 transition-colors duration-500">Back to home</a>
+
+            <Form
+                form={form}
+                name="loginForm"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                className='text-center rounded'
+            >
+                <Title level={2}>Login</Title>
+                <Form.Item
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your email!' }]}
+                >
+                    <Input placeholder="Email" />
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    rules={[{ required: true, message: 'Please input your password!' }]}
+                >
+                    <Input.Password placeholder="Password" />
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className='w-full'>
+                        Login
+                    </Button>
+                </Form.Item>
+                <div className='mt-2 text-blue-500 hover:text-blue-700'>
+                    <a href="/">This function will be available soon, back to home</a>
                 </div>
-                <div className='mt-2 text-blue-500 hover:text-blue-700 transition-colors duration-500'>
-                    <a href="/">this function will be available soon, back to home</a>
-                </div>
-            </form>
+            </Form>
         </section>
     );
 }

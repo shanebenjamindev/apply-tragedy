@@ -18,8 +18,12 @@ const routes = [
         ]
     },
     {
-        path: "/login",
+        path: "/sign-in",
         element: lazy(() => import("../view/pages/Login/Login")),
+    },
+    {
+        path: "/sign-up",
+        element: lazy(() => import("../view/pages/SignUp/SignUp")),
     },
 ]
 

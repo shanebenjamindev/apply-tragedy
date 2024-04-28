@@ -4,6 +4,7 @@ import { actAddJob, actDeleteJob, fetchJobs } from '../../redux/action';
 import { Table, Select, Button, Form, Input } from 'antd';
 import Loading from '../Loading';
 import './style.css';
+import { GetUser } from '../../hooks/userHooks';
 
 const { Option } = Select;
 
@@ -13,21 +14,27 @@ export default function JobComponent() {
     const [loading, setLoading] = useState(false);
     const [filter, setFilter] = useState(null);
 
-    const jobs = useSelector(state => state.jobReducer.data);
-
+    const user = GetUser() || "guest";
+    const userId = user?.userData?._id;
 
     useEffect(() => {
-        dispatch(fetchJobs())
-    }, [dispatch]);
+        if (userId) {
+            dispatch(fetchJobs(userId));
+        }
+    }, [userId, dispatch]);
+
+    const jobs = useSelector(state => state.jobReducer.data);
 
     const handleDeleteJob = (id) => {
-
         dispatch(actDeleteJob(id))
     }
 
-    const onSubmitJob = (e) => {
-        dispatch(actAddJob(e))
-        form.resetFields();
+    const onSubmitJob = (values) => {
+        setLoading(true);
+        const jobData = { ...values, user: userId };
+        dispatch(actAddJob(jobData))
+        // form.resetFields();
+        setLoading(false);
     };
 
     const handleFilter = (filterValue) => {
@@ -46,6 +53,12 @@ export default function JobComponent() {
         console.log(jobId, newStatus);
     };
     const columns = [
+        {
+            title: 'URL',
+            dataIndex: 'url',
+            key: 'url',
+            align: 'center'
+        },
         {
             title: 'Company',
             dataIndex: 'company',
@@ -115,57 +128,10 @@ export default function JobComponent() {
 
     return (
         <section className=''>
-
-
-            <div className='flex md:hidden'>
-                <Select className='w-2/5' placeholder="Status" onChange={(e) => handleFilter(e.target.value)}>
-                    <Option value="Bookmarked">Bookmarked</Option>
-                    <Option value="Applying">Applying</Option>
-                    <Option value="Interview">Interview</Option>
-                    <Option value="Pending">Pending</Option>
-                    <Option value="Accepted">Accepted</Option>
-                    <Option value="Closed">Closed</Option>
-                </Select>
-            </div>
-
-
-            <div className="mb-4 p-3">
-                <div className="hidden md:flex justify-around">
-                    <button className="job-pipeline-button" onClick={() => handleFilter('Bookmarked')}>
-                        <div className="section-value h4">{countJobs('Bookmarked')}</div>
-                        <div className="section-label">Bookmarked</div>
-                    </button>
-                    <button className="job-pipeline-button" onClick={() => handleFilter('Applying')}>
-                        <div className="section-value h4">{countJobs('Applying')}</div>
-                        <div className="section-label">Applying</div>
-                    </button>
-                    <button className="job-pipeline-button" onClick={() => handleFilter('Interview')}>
-                        <div className="section-value h4">{countJobs('Interview')}</div>
-                        <div className="section-label">Interview</div>
-                    </button>
-                    <button className="job-pipeline-button" onClick={() => handleFilter('Pending')}>
-                        <div className="section-value h4">{countJobs('Pending')}</div>
-                        <div className="section-label">Pending</div>
-                    </button>
-                    <button className="job-pipeline-button" onClick={() => handleFilter('Accepted')}>
-                        <div className="section-value h4">{countJobs('Accepted')}</div>
-                        <div className="section-label">Accepted</div>
-                    </button>
-                    <button className="job-pipeline-button" onClick={() => handleFilter('Closed')}>
-                        <div className="section-value h4">{countJobs('Closed')}</div>
-                        <div className="section-label">Closed</div>
-                    </button>
-                </div>
-                <h2 className="text-2xl font-bold mb-4">Add Jobs</h2>
-                <Form form={form} onFinish={onSubmitJob} layout="">
-                    <Form.Item name="position" rules={[{ required: true, message: 'Please input position!' }]}>
-                        <Input placeholder="Position" />
-                    </Form.Item>
-                    <Form.Item name="company" rules={[{ required: true, message: 'Please input company!' }]}>
-                        <Input placeholder="Company" />
-                    </Form.Item>
-                    <Form.Item name="status" rules={[{ required: true, message: 'Please select status!' }]}>
-                        <Select placeholder="Status">
+            {user !== "guest" ?
+                <>
+                    <div className='flex md:hidden'>
+                        <Select className='w-2/5' placeholder="Status" onChange={(e) => handleFilter(e.target.value)}>
                             <Option value="Bookmarked">Bookmarked</Option>
                             <Option value="Applying">Applying</Option>
                             <Option value="Interview">Interview</Option>
@@ -173,31 +139,85 @@ export default function JobComponent() {
                             <Option value="Accepted">Accepted</Option>
                             <Option value="Closed">Closed</Option>
                         </Select>
-                    </Form.Item>
-                    <Form.Item name="address" rules={[{ required: true, message: 'Please input address!' }]}>
-                        <Input placeholder="Address" />
-                    </Form.Item>
-                    <Form.Item name="url" rules={[{ required: true, message: 'Please input URL!' }]}>
-                        <Input placeholder="URL" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" loading={loading}>
-                            Add Job
-                        </Button>
-                    </Form.Item>
-                </Form>
+                    </div>
 
-                {
-                    jobs ? (
-                        <div style={{ overflow: "auto" }}>
-                            <Table dataSource={filteredJobs} columns={columns} className='text-center' rowKey={"_id"} />
+
+                    <div className="mb-4 p-3">
+                        <div className="hidden md:flex justify-around">
+                            <button className="job-pipeline-button" onClick={() => handleFilter('Bookmarked')}>
+                                <div className="section-value h4">{countJobs('Bookmarked')}</div>
+                                <div className="section-label">Bookmarked</div>
+                            </button>
+                            <button className="job-pipeline-button" onClick={() => handleFilter('Applying')}>
+                                <div className="section-value h4">{countJobs('Applying')}</div>
+                                <div className="section-label">Applying</div>
+                            </button>
+                            <button className="job-pipeline-button" onClick={() => handleFilter('Interview')}>
+                                <div className="section-value h4">{countJobs('Interview')}</div>
+                                <div className="section-label">Interview</div>
+                            </button>
+                            <button className="job-pipeline-button" onClick={() => handleFilter('Pending')}>
+                                <div className="section-value h4">{countJobs('Pending')}</div>
+                                <div className="section-label">Pending</div>
+                            </button>
+                            <button className="job-pipeline-button" onClick={() => handleFilter('Accepted')}>
+                                <div className="section-value h4">{countJobs('Accepted')}</div>
+                                <div className="section-label">Accepted</div>
+                            </button>
+                            <button className="job-pipeline-button" onClick={() => handleFilter('Closed')}>
+                                <div className="section-value h4">{countJobs('Closed')}</div>
+                                <div className="section-label">Closed</div>
+                            </button>
                         </div>
+                        <h2 className="text-2xl font-bold mb-4">Add Jobs</h2>
+                        <Form form={form} onFinish={onSubmitJob} layout="">
+                            <Form.Item name="position" rules={[{ required: true, message: 'Please input position!' }]}>
+                                <Input placeholder="Position" />
+                            </Form.Item>
+                            <Form.Item name="company" rules={[{ required: true, message: 'Please input company!' }]}>
+                                <Input placeholder="Company" />
+                            </Form.Item>
+                            <Form.Item name="status" rules={[{ required: true, message: 'Please select status!' }]}>
+                                <Select placeholder="Status">
+                                    <Option value="Bookmarked">Bookmarked</Option>
+                                    <Option value="Applying">Applying</Option>
+                                    <Option value="Interview">Interview</Option>
+                                    <Option value="Pending">Pending</Option>
+                                    <Option value="Accepted">Accepted</Option>
+                                    <Option value="Closed">Closed</Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="address" rules={[{ required: true, message: 'Please input address!' }]}>
+                                <Input placeholder="Address" />
+                            </Form.Item>
 
-                    ) : (
-                        <Loading />
-                    )
-                }
-            </div>
+                            <Form.Item name="user" >
+                                <Input placeholder="User" value={userId} type="hidden" />
+                            </Form.Item>
+
+                            <Form.Item name="url" rules={[{ required: true, message: 'Please input URL!' }]}>
+                                <Input placeholder="URL" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" loading={loading}>
+                                    Add Job
+                                </Button>
+                            </Form.Item>
+                        </Form>
+
+                        {jobs ? (
+                            <div style={{ overflow: "auto" }}>
+                                <Table dataSource={filteredJobs} columns={columns} className='text-center' rowKey={"_id"} />
+                            </div>
+
+                        ) : (
+                            // <>Chuaw co info</>
+                            <Loading />
+                        )
+                        }
+                    </div>
+                </>
+                : null}
 
         </section >
     );

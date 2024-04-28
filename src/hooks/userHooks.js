@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export function GetUser() {
-
-    const userData = JSON?.parse(localStorage.getItem("USER_LOGIN"));
-    const user = userData?.user;
-
+    const user = JSON?.parse(localStorage?.getItem("USER"));
     return user
+}
+export function SetLocalUser(user) {
+    return localStorage.setItem("USER", JSON.stringify(user));
+}
+
+export function LogoutLocalUser(navigate) {
+    navigate("/sign-in", { replace: true })
+    return localStorage.removeItem("USER");
 }
