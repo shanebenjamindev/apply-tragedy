@@ -5,7 +5,6 @@
     background-attachment: fixed;
     background-position: center;
     position: relative;
-    z-index: -1;
     box-shadow: inset rgb(16, 22, 29) 30rem 7px 10rem 1rem;
 
 }

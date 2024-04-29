@@ -34,7 +34,7 @@ export default function Login() {
         <section className='theme flex h-screen justify-center items-center w-full'>
             <a href="/" className="fixed top-3 left-3 text-blue-500 hover:text-blue-700 transition-colors duration-500">Back to home</a>
 
-            <div className='p-4 rounded w-3/12'>
+            <div className='w-full rounded md:w-3/12'>
                 <Form
                     form={form}
                     name="loginForm"

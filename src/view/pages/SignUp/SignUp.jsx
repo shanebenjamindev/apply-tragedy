@@ -33,7 +33,7 @@ export default function SignUp() {
                 name="signUpForm"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                className='text-center rounded md:w-5/12 md:p-5'
+                className='text-center rounded md:w-5/12 md:p-5 w-full'
             >
                 <h1 className='main-title my-5 text-white'>Sign Up</h1>
                 <Form.Item

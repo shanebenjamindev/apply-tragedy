@@ -12,7 +12,7 @@ export default function Header() {
         LogoutLocalUser(navigate);
     }
     return (
-        <div className='fixed w-full bg-gray-800 p-3 text-white'>
+        <div className='z-50 fixed w-full bg-gray-800 p-3 text-white'>
             <nav className='flex justify-between items-center'>
                 <Link to="/">Tragedy</Link>
                 <ul className='flex gap-3'>
