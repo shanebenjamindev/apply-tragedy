@@ -27,7 +27,7 @@ export default function Loading() {
           <div className="sk-chase-dot"></div>
           <div className="sk-chase-dot"></div>
         </div>
-        <div className="ml-3">Please wait...</div>
+        <div className="ml-3">Please wait for the response from server...</div>
       </div>
     </>
   );

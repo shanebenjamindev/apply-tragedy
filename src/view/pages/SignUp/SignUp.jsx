@@ -3,7 +3,7 @@ import { Form, Input, Button, Typography, Alert } from 'antd';
 import userData from '../../../data/userData.json';
 import { useDispatch, useSelector } from 'react-redux';
 import { actSignUp } from '../../../redux/action';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GetUser } from '../../../hooks/userHooks';
 const { Title } = Typography;
 
@@ -25,7 +25,7 @@ export default function SignUp() {
     };
 
     return (
-        <section className='flex h-screen justify-center items-center w-full'>
+        <section className='theme flex h-screen justify-center items-center w-full'>
             <a href="/" className="fixed top-3 left-3 text-blue-500 hover:text-blue-700 transition-colors duration-500">Back to home</a>
 
             <Form
@@ -35,7 +35,7 @@ export default function SignUp() {
                 onFinish={onFinish}
                 className='text-center rounded md:w-5/12 md:p-5'
             >
-                <Title level={2}>Sign Up</Title>
+                <h1 className='main-title my-5 text-white'>Sign Up</h1>
                 <Form.Item
                     name="name"
                     rules={[{ required: true, message: 'Please input your email!' }]}
@@ -66,17 +66,15 @@ export default function SignUp() {
                 >
                     <Input placeholder="Phone" />
                 </Form.Item>
-                <Form.Item>
+                <div className='md:flex justify-end items-center gap-2'>
+                    <div>
+                        <Link to="/sign-in" className="text-blue-500 hover:text-blue-700 transition-colors duration-500">
+                            Already have account? Go Login</Link>
+                    </div>
                     <Button type="primary" htmlType="submit">
                         Sign Up
                     </Button>
-                </Form.Item>
-                <div>
-                    <a href="/sign-in" className="text-blue-500 hover:text-blue-700 transition-colors duration-500">
-                        <p>Already have account?</p>
-                        <Button>Go Login</Button></a>
                 </div>
-
             </Form>
         </section>
     );

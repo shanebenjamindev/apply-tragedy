@@ -5,4 +5,5 @@ const api = axios.create({
 })
 
 // import.meta.env.VITE_API_URL
+// import.meta.env.VITE_LOCAL_API
 export default api;

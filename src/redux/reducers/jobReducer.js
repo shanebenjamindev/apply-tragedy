@@ -32,6 +32,10 @@ const jobReducer = (state = initialState, action) => {
     case actions.DELETE_JOB:
       return { ...state }
 
+    case actions.STATUS_REQUEST:
+      state.loading = true;
+      state.error = null;
+      return { ...state }
 
     // case types.UPDATE_JOB:
     //   return {

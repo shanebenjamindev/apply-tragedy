@@ -34,11 +34,26 @@ export const actDeleteJob = (id) => {
     };
 };
 
+export const actStatusUpdate = (id, newStatus) => {
+    return (dispatch) => {
+        const status = newStatus
+        api.put(`/jobs/update-status/${id}`, { status })
+            .then((result) => {
+                alert(result.data.message);
+                window.location.reload()
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+    };
+};
+// const actStatusUpdateRequest = () => ({ type: actions.STATUS_REQUEST });
+
 export const actAddJob = (newJob) => {
     return (dispatch) => {
         api.post(`/jobs/create`, newJob)
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 dispatch(fetchJobs(newJob.user))
                 dispatch({ type: actions.ADD_JOB });
                 alert(result.data.message);

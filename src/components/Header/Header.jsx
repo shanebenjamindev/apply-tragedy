@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GetUser, LogoutLocalUser } from '../../hooks/userHooks';
+import { Button } from 'antd';
 
 export default function Header() {
     const user = GetUser()
@@ -11,20 +12,13 @@ export default function Header() {
         LogoutLocalUser(navigate);
     }
     return (
-        <div className='w-full bg-gray-800 p-5 text-white'>
-            <nav className='flex justify-between'>
-                <div>Application Tragedy</div>
+        <div className='fixed w-full bg-gray-800 p-3 text-white'>
+            <nav className='flex justify-between items-center'>
+                <Link to="/">Tragedy</Link>
                 <ul className='flex gap-3'>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/apply">Jobs</Link>
-                    </li>
-
                     {userData ?
 
-                        <li>Hello, {userData?.name} <button onClick={handleLogout}>Logout</button></li>
+                        <li><span className='mr-2'>Welcome, {userData?.name}</span><Button danger type='primary' onClick={handleLogout}>Logout</Button></li>
                         :
 
                         <li>

@@ -1,0 +1,40 @@
+.bg {
+    background-image: url(/images/bg.png);
+    background-size: cover;
+    height: 100dvh;
+    background-attachment: fixed;
+    background-position: center;
+    position: relative;
+    z-index: -1;
+    box-shadow: inset rgb(16, 22, 29) 30rem 7px 10rem 1rem;
+
+}
+
+.title-extra-large {
+    font-size: 5rem;
+    color: white;
+    font-weight: 900;
+}
+
+.title-button {
+    font-size: xx-large;
+    color: white;
+
+    >button {
+        font-weight: 700;
+        background-color: rgb(31, 41, 55);
+        padding: 10px;
+        transition: all 1s ease;
+
+        &:hover {
+
+            transform: translateX(30px);
+        }
+    }
+}
+
+@media (width <=600px) {
+    .title-extra-large {
+        font-size: 2rem;
+    }
+}
