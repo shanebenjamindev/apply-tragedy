@@ -24,14 +24,6 @@ header {
     background-color: var(--primary-theme);
     padding: 10px 20px;
 
-    >nav {
-        .logo {
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 30px;
-        }
-    }
-
     .header-button {
         background-color: var(--primary-theme);
         padding: 5px 0;

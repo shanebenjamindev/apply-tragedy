@@ -14,7 +14,7 @@ export default function Header() {
     return (
         <header className='z-50 fixed w-full text-white'>
             <nav className='flex justify-between items-center'>
-                <Link to="/" className='logo nav-link'>Tragedy</Link>
+                <Link to="/" className='main-title nav-link'>Tragedy</Link>
                 <ul className='flex gap-3'>
                     {userData ?
                         <li><span className='mr-2'>Welcome, {userData?.name}</span><Button danger type='primary' onClick={handleLogout}>Logout</Button></li>

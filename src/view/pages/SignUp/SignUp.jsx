@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actSignUp } from '../../../redux/action';
 import { Link, useNavigate } from 'react-router-dom';
 import { GetUser } from '../../../hooks/userHooks';
+import './style.css'
 const { Title } = Typography;
 
 export default function SignUp() {
@@ -25,57 +26,69 @@ export default function SignUp() {
     };
 
     return (
-        <section className='theme flex h-screen justify-center items-center w-full'>
-            <a href="/" className="fixed top-3 left-3 text-blue-500 hover:text-blue-700 transition-colors duration-500">Back to home</a>
+        <section style={{ backgroundColor: "var(--primary-fade-bg)" }} className='flex h-screen justify-center items-center w-full'>
+            <Link to={"/"} className='flex gap-2 items-center absolute top-10 rounded-2xl' >
+                <img width={"50px"} src='/images/logo.jpg' />
+                <h2 className='main-title'>Tragedy</h2>
+            </Link>
 
-            <Form
-                form={form}
-                name="signUpForm"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                className='text-center rounded md:w-5/12 md:p-5 w-full'
-            >
-                <h1 className='main-title my-5 text-white'>Sign Up</h1>
-                <Form.Item
-                    name="name"
-                    rules={[{ required: true, message: 'Please input your email!' }]}
+            <div className='rounded-2xl bg-white md:w-3/12 p-5 w-full'>
+                <Form
+                    form={form}
+                    name="signUpForm"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    className='justify-center'
                 >
-                    <Input placeholder="Your Name" />
-                </Form.Item>
-                <Form.Item
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your email!' }]}
-                >
-                    <Input placeholder="Your Email" />
-                </Form.Item>
-                <Form.Item
-                    name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                    <Input.Password placeholder="Password" />
-                </Form.Item>
-                <Form.Item
-                    name="confirmPassword"
-                    rules={[{ required: true, message: 'Please input confirm password!' }]}
-                >
-                    <Input.Password placeholder="Confirm Password" />
-                </Form.Item>
-                <Form.Item
-                    name="phone"
-                    rules={[{ required: true, message: 'Please input your phone!' }]}
-                >
-                    <Input placeholder="Phone" />
-                </Form.Item>
-                <div className='md:flex justify-end items-center gap-2'>
-                    <div>
-                        <Link to="/sign-in" className="text-blue-500 hover:text-blue-700 transition-colors duration-500">
-                            Already have account? Go Login</Link>
+                    <h1 className='form-title my-5'>Sign Up</h1>
+
+                    <div className='flex justify-between gap-3'>
+                        <Form.Item
+                            name="firstName"
+                            rules={[{ required: true, message: 'Please input your email!' }]}
+                        >
+                            <Input placeholder="First Name" />
+                        </Form.Item>
+                        <Form.Item
+                            name="lastName"
+                            rules={[{ required: true, message: 'Please input your email!' }]}
+                        >
+                            <Input placeholder="Last Name" />
+                        </Form.Item>
                     </div>
-                    <Button type="primary" htmlType="submit">
-                        Sign Up
-                    </Button>
-                </div>
-            </Form>
-        </section>
+
+
+                    <Form.Item
+                        name="email"
+                        rules={[{ required: true, message: 'Please input your email!' }]}
+                    >
+                        <Input placeholder="Your Email" />
+                    </Form.Item>
+                    <Form.Item
+                        name="password"
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                    >
+                        <Input.Password placeholder="Password" />
+                    </Form.Item>
+                    <Form.Item
+                        name="confirmPassword"
+                        rules={[{ required: true, message: 'Please input confirm password!' }]}
+                    >
+                        <Input.Password placeholder="Confirm Password" />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button htmlType="submit" className='w-full bg-slate-700 text-white'>
+                            Create an account
+                        </Button>
+                    </Form.Item>
+                    <hr className='p-2'></hr>
+
+                    <div className='flex justify-between items-center'>
+                        <span> Already have account?</span>
+                        <Link to="/sign-in"><Button>Sign in</Button></Link>
+                    </div>
+                </Form>
+            </div>
+        </section >
     );
 }

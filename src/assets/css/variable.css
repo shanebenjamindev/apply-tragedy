@@ -1,6 +1,7 @@
 :root {
     --primary-theme: rgb(31, 41, 55);
     --primary-theme-color: #ffff;
+    --primary-fade-bg: #F1F0EE;
     
     --primary-bg: rgb(16, 22, 29);
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Button, Typography, Alert } from 'antd';
+import { Form, Input, Button, Typography, Alert, Image } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actSignIn } from '../../../redux/action';
 import { Link, useNavigate } from 'react-router-dom';
@@ -27,43 +27,50 @@ export default function Login() {
 
     const onFinish = (values) => {
         dispatch(actSignIn(values))
+        console.log(values);
     };
 
     return (
-        <section className='theme flex h-screen justify-center items-center w-full'>
-            <a href="/" className="fixed top-3 left-3 text-blue-500 hover:text-blue-700 transition-colors duration-500">Back to home</a>
+        <section style={{ backgroundColor: "var(--primary-fade-bg)" }} className='relative flex flex-col h-screen justify-center items-center w-full'>
 
-            <div className='w-full rounded md:w-3/12'>
-                <Form
-                    form={form}
-                    name="loginForm"
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                    className='text-center rounded'
+            <Link to={"/"} className='flex gap-2 items-center absolute top-10 rounded-2xl' >
+                <img width={"50px"} src='/images/logo.jpg' />
+                <h2 className='main-title'>Tragedy</h2>
+            </Link>
+
+            <Form
+                form={form}
+                name="loginForm"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                className='rounded-2xl bg-white p-5 md:w-4/12 w-full'
+                layout='vertical'
+            >
+                <h2 className='form-title my-5' >Login</h2>
+                <Form.Item
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your email!' }]}
                 >
-                    <h1 className='main-title my-5 text-white' >Login</h1>
-                    <Form.Item
-                        name="email"
-                        rules={[{ required: true, message: 'Please input your email!' }]}
-                    >
-                        <Input placeholder="Email" />
-                    </Form.Item>
-                    <Form.Item
-                        name="password"
-                        rules={[{ required: true, message: 'Please input your password!' }]}
-                    >
-                        <Input.Password placeholder="Password" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" className='w-full'>
-                            Login
-                        </Button>
-                    </Form.Item>
-                    <div className=' text-blue-500 hover:text-blue-700'>
-                        <Link to="/sign-up">Sign up</Link>
-                    </div>
-                </Form>
-            </div>
+
+                    <Input placeholder="Email" />
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    rules={[{ required: true, message: 'Please input your password!' }]}
+                >
+                    <Input.Password placeholder="Password" />
+                </Form.Item>
+                <Form.Item>
+                    <Button htmlType="submit" className='w-full bg-slate-700 text-white'>
+                        Login
+                    </Button>
+                </Form.Item>
+                <hr className='p-2'></hr>
+                <div className='flex justify-between '>
+                    <span> Dont have account?</span>
+                    <Link to="/sign-up"><Button>Sign up</Button></Link>
+                </div>
+            </Form>
         </section>
     );
 }
