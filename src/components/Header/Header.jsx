@@ -17,7 +17,7 @@ export default function Header() {
                 <Link to="/" className='main-title nav-link'>Tragedy</Link>
                 <ul className='flex gap-3'>
                     {userData ?
-                        <li><span className='mr-2'>Welcome, {userData?.name}</span><Button danger type='primary' onClick={handleLogout}>Logout</Button></li>
+                        <li><span className='mr-2'>Welcome, {userData?.lastName || "User"}</span><Button danger type='primary' onClick={handleLogout}>Logout</Button></li>
                         :
                         <li>
                             <Link className='nav-link' to="/sign-in"><button className='header-button'><span>Login or Register</span></button></Link>

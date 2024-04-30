@@ -1,7 +1,7 @@
 .bg {
     background-image: url(/images/bg.png);
     background-size: cover;
-    height: 100dvh;
+    min-height: 100dvh;
     background-attachment: fixed;
     background-position: center;
     position: relative;
@@ -28,6 +28,71 @@
 
         &:hover {
             transform: translateX(30px);
+        }
+    }
+}
+
+.process-container {
+    justify-content: space-between;
+    padding: 30px 0;
+    position: relative;
+}
+
+.job-pipeline-button .active {
+    background-color: red;
+}
+
+.job-pipeline-button {
+    -webkit-clip-path: polygon(0% 0%, calc(100% - 15px) 0%, 100% 50%, calc(100% - 15px) 100%, 0% 100%, 15px 50%, 0% 0%);
+    clip-path: polygon(0% 0%, calc(100% - 15px) 0%, 100% 50%, calc(100% - 15px) 100%, 0% 100%, 15px 50%, 0% 0%);
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    text-align: center;
+    padding: 10px;
+    background-color: aliceblue;
+    transition: all 0.5s ease;
+
+    /* First button style */
+    &:first-child {
+        &:hover {
+            background-color: grey;
+        }
+    }
+
+    /* Second button style */
+    &:nth-child(2) {
+
+        &:hover {
+            background-color: rgb(0, 251, 255);
+        }
+    }
+
+    /* Third button style */
+    &:nth-child(3) {
+
+        &:hover {
+            background-color: rgb(0, 119, 255);
+        }
+    }
+
+    /* Fourth button style */
+    &:nth-child(4) {
+        &:hover {
+            background-color: rgb(255, 230, 0);
+        }
+    }
+
+    /* Fifth button style */
+    &:nth-child(5) {
+        &:hover {
+            background-color: rgb(0, 255, 153);
+        }
+    }
+
+    /* Sixth button style */
+    &:nth-child(6) {
+        &:hover {
+            background-color: rgb(255, 0, 0);
         }
     }
 }

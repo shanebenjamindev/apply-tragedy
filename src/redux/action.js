@@ -1,5 +1,7 @@
 import * as actions from './types';
 import api from '../apiUltils';
+import { GetUser } from '../hooks/userHooks';
+const user = GetUser()
 
 export const fetchJobs = (id) => {
     return (dispatch) => {
@@ -23,10 +25,15 @@ export const actDeleteJob = (id) => {
     return (dispatch) => {
         api.delete(`/jobs/delete/${id}`)
             .then((result) => {
-                alert(result.data);
-                window.location.reload()
-                // dispatch({ type: actions.DELETE_JOB });
-                // dispatch(fetchJobs());
+                if (result.status === 200) {
+                    if (result.data.status === "ERR") {
+                        // dispatch(actSignUpFail(result.data.message));
+                    }
+                    if (result.data.status === "OK") {
+                        // dispatch(actSignUpSuccess(result.data.message))
+                        // navigate("/sign-in")
+                    }
+                };
             })
             .catch((error) => {
                 alert(error.message);
@@ -47,19 +54,16 @@ export const actStatusUpdate = (id, newStatus) => {
             });
     };
 };
-// const actStatusUpdateRequest = () => ({ type: actions.STATUS_REQUEST });
 
 export const actAddJob = (newJob) => {
     return (dispatch) => {
         api.post(`/jobs/create`, newJob)
             .then((result) => {
-                // console.log(result);
-                dispatch(fetchJobs(newJob.user))
+                dispatch(fetchJobs(user?.userData?._id))
                 dispatch({ type: actions.ADD_JOB });
                 alert(result.data.message);
             })
             .catch((error) => {
-                // const {  } = error.data
                 console.error(error.message);
             });
     };

@@ -24,7 +24,12 @@ main {
 }
 
 section {
-    padding: 50px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 10px;
+    min-height: 100dvh;
 }
 
 main {

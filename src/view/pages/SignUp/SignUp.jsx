@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actSignUp } from '../../../redux/action';
 import { Link, useNavigate } from 'react-router-dom';
 import { GetUser } from '../../../hooks/userHooks';
-import './style.css'
 const { Title } = Typography;
 
 export default function SignUp() {

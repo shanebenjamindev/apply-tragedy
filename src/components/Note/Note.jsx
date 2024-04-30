@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
-export default function Note() {
-    const [open, setOpen] = useState(true);
+export default function Note({ note }) {
+    const [{ open }, setOpen] = useState(note);
 
     return (
         <div className='fixed bottom-1 right-2 z-20'>

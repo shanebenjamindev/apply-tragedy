@@ -27,7 +27,6 @@ export default function Login() {
 
     const onFinish = (values) => {
         dispatch(actSignIn(values))
-        console.log(values);
     };
 
     return (
