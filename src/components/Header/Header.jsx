@@ -20,7 +20,7 @@ export default function Header() {
                         <li><span className='mr-2'>Welcome, {userData?.name}</span><Button danger type='primary' onClick={handleLogout}>Logout</Button></li>
                         :
                         <li>
-                            <Link className='nav-link' to="/sign-in"><button className='header-button'>Login or Register</button></Link>
+                            <Link className='nav-link' to="/sign-in"><button className='header-button'><span>Login or Register</span></button></Link>
                         </li>
                     }
 
