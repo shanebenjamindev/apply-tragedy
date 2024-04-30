@@ -20,13 +20,13 @@
     color: white;
 
     >button {
+        margin: 10px 0;
         font-weight: 700;
         background-color: rgb(31, 41, 55);
         padding: 10px;
         transition: all 1s ease;
 
         &:hover {
-
             transform: translateX(30px);
         }
     }

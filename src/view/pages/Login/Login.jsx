@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Typography, Alert } from 'antd';
-import userData from '../../../data/userData.json';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actSignIn } from '../../../redux/action';
 import { Link, useNavigate } from 'react-router-dom';
+import Loading from '../../../components/Loading';
+import { useMessageError, useMessageSuccess } from '../../../components/Message/Message';
 import { GetUser } from '../../../hooks/userHooks';
 
 const { Title } = Typography;
@@ -12,22 +13,20 @@ export default function Login() {
     const [form] = Form.useForm();
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
-    const user = GetUser()
+    const { loading, data, error } = useSelector(state => state.userReducer)
 
     useEffect(() => {
-        if (user) {
-            navigate("/");
+        if (!loading && !error && data) {
+            const user = GetUser();
+            if (user) {
+                useMessageSuccess("Login success");
+                navigate("/");
+            }
         }
-    }, [user]);
-
+    }, [loading, data, error]);
 
     const onFinish = (values) => {
-        dispatch(actSignIn(values, navigate))
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        dispatch(actSignIn(values))
     };
 
     return (
@@ -40,7 +39,6 @@ export default function Login() {
                     name="loginForm"
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                     className='text-center rounded'
                 >
                     <h1 className='main-title my-5 text-white' >Login</h1>

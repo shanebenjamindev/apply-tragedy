@@ -68,18 +68,18 @@ export const actAddJob = (newJob) => {
 
 export const actSignUp = (newUser, navigate) => {
     return (dispatch) => {
+        dispatch(actSignUpRequest)
         api.post(`/user/sign-up`, newUser)
             .then((result) => {
                 if (result.status === 200) {
                     if (result.data.status === "ERR") {
-                        const { message } = result.data
-                        alert(message)
+                        dispatch(actSignUpFail(result.data.message));
                     }
-                    else if (result.data.status === "OK") {
-                        alert("sign up successfully!")
-                        navigate("/")
+                    if (result.data.status === "OK") {
+                        dispatch(actSignUpSuccess(result.data.message))
+                        navigate("/sign-in")
                     }
-                }
+                };
             })
             .catch((error) => {
                 console.log(error);
@@ -87,27 +87,25 @@ export const actSignUp = (newUser, navigate) => {
     }
 }
 
+const actSignUpRequest = () => ({ type: actions.SIGNUP_REQUEST })
+const actSignUpSuccess = (data) => ({ type: actions.SIGNUP_SUCCESS, payload: data })
+const actSignUpFail = (error) => ({ type: actions.SIGNUP_FAIL, payload: error })
 
-const actUserRequest = () => ({ type: actions.SIGNUP_REQUEST });
-
-
-export const actSignIn = (user, navigate) => {
+export const actSignIn = (user) => {
     return (dispatch) => {
         dispatch(actLoginRequest)
         api.post(`/user/sign-in`, user)
-            .then(async (result) => {
+            .then((result) => {
                 if (result.status === 200) {
                     if (result.data.status === "ERR") {
-                        const { message } = result.data
-                        alert(message)
+                        console.log(result.data);
+                        dispatch(actLoginFail(result.data.message));
                     }
-                    else if (result.data.status === "OK") {
-                        const { data } = result
-                        await dispatch(actLoginSuccess(data))
-                        alert("sign in successfully!")
-                        navigate("/")
+                    if (result.data.status === "OK") {
+                        console.log(result.data);
+                        dispatch(actLoginSuccess(result.data))
                     }
-                }
+                };
             })
             .catch((error) => {
                 console.log(error);
@@ -117,3 +115,4 @@ export const actSignIn = (user, navigate) => {
 
 const actLoginRequest = () => ({ type: actions.SIGNIN_REQUEST })
 const actLoginSuccess = (data) => ({ type: actions.SIGNIN_SUCCESS, payload: data })
+const actLoginFail = (error) => ({ type: actions.SIGNIN_FAIL, payload: error })
