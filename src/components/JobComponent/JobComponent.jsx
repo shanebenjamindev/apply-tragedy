@@ -83,7 +83,7 @@ export default function JobComponent({ user, listJob }) {
 
     return (
         <div>
-            {user ?
+            {listJob ?
                 <div className='md:w-10/12 m-auto flex-col gap-30'>
                     <div className='md:flex gap-10 w-full'>
                         <div className='md:w-5/12'>

@@ -1,6 +1,7 @@
 import * as actions from './types';
 import api from '../apiUltils';
 import { GetUser } from '../hooks/userHooks';
+import { useMessageSuccess } from '../components/Message/Message';
 const user = GetUser()
 
 export const fetchJobs = (id) => {
@@ -26,13 +27,13 @@ export const actDeleteJob = (id) => {
         api.delete(`/jobs/delete/${id}`)
             .then((result) => {
                 if (result.status === 200) {
-                    if (result.data.status === "ERR") {
-                        // dispatch(actSignUpFail(result.data.message));
-                    }
-                    if (result.data.status === "OK") {
-                        // dispatch(actSignUpSuccess(result.data.message))
-                        // navigate("/sign-in")
-                    }
+                    useMessageSuccess(result.data)
+                    // if (result.data.status === "ERR") {
+                    //     // dispatch(actSignUpFail(result.data.message));
+                    // }
+                    // if (result.data.status === "OK") {
+                    //     // dispatch(actSignUpSuccess(result.data.message))
+                    // }
                 };
             })
             .catch((error) => {

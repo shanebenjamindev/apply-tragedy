@@ -21,7 +21,7 @@ export default function Home() {
         if (user !== null) {
             dispatch(fetchJobs(user?.userData?._id));
         }
-    }, [user]);
+    }, []);
 
     const [filter, setFilter] = useState(null);
     const [activeFilter, setActiveFilter] = useState(null)
