@@ -40,3 +40,32 @@ main {
 main::-webkit-scrollbar {
     display: none;
 }
+
+.primary-btn {
+    padding: 5px 10px;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid var(--primary-theme);
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+        background-color: var(--primary-theme);
+        color: var(--primary-theme-color)
+    }
+}
+
+.primary-btn-reverse {
+    padding: 5px 10px;
+    display: block;
+    border-radius: 4px;
+    background-color: var(--primary-theme);
+    color: var(--primary-theme-color);
+    transition: all 0.25s ease-in-out;
+    border: 1px solid transparent;
+
+    &:hover {
+        background-color: var(--primary-theme-color);
+        border-color: var(--primary-theme);
+        color: var(--primary-theme)
+    }
+}

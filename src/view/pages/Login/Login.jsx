@@ -8,11 +8,12 @@ import { useMessageError, useMessageSuccess } from '../../../components/Message/
 import { GetUser } from '../../../hooks/userHooks';
 
 const { Title } = Typography;
-
+import GoogleLoginButton from '../../../components/LoginWithGoogle/LoginWithGoogle';
 export default function Login() {
     const [form] = Form.useForm();
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     const { loading, data, error } = useSelector(state => state.userReducer)
 
     useEffect(() => {
@@ -36,7 +37,6 @@ export default function Login() {
                 <img width={"50px"} src='/images/logo.jpg' />
                 <h2 className='main-title'>Tragedy</h2>
             </Link>
-
             <Form
                 form={form}
                 name="loginForm"
@@ -46,6 +46,7 @@ export default function Login() {
                 layout='vertical'
             >
                 <h2 className='form-title my-5' >Login</h2>
+
                 <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
@@ -60,14 +61,20 @@ export default function Login() {
                     <Input.Password placeholder="Password" />
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType="submit" className='w-full bg-slate-700 text-white'>
+                    <button htmlType="submit" className='w-full primary-btn-reverse'>
                         Login
-                    </Button>
+                    </button>
                 </Form.Item>
                 <hr className='p-2'></hr>
-                <div className='flex justify-between '>
+                <div className='flex justify-center text-center'>
+                    <div>
+                        <span >or</span>
+                        <GoogleLoginButton />
+                    </div>
+                </div>
+                <div className='flex justify-between items-center my-2'>
                     <span> Dont have account?</span>
-                    <Link to="/sign-up"><Button>Sign up</Button></Link>
+                    <Link to="/sign-up"><button className='primary-btn'>Sign up</button></Link>
                 </div>
             </Form>
         </section>

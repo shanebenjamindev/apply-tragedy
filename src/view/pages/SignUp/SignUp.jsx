@@ -44,13 +44,13 @@ export default function SignUp() {
                     <div className='flex justify-between gap-3'>
                         <Form.Item
                             name="firstName"
-                            rules={[{ required: true, message: 'Please input your email!' }]}
+                            rules={[{ required: true, message: 'Please input your name!' }]}
                         >
                             <Input placeholder="First Name" />
                         </Form.Item>
                         <Form.Item
                             name="lastName"
-                            rules={[{ required: true, message: 'Please input your email!' }]}
+                        // rules={[{ required: true, message: 'Please input your email!' }]}
                         >
                             <Input placeholder="Last Name" />
                         </Form.Item>
@@ -76,15 +76,15 @@ export default function SignUp() {
                         <Input.Password placeholder="Confirm Password" />
                     </Form.Item>
                     <Form.Item>
-                        <Button htmlType="submit" className='w-full bg-slate-700 text-white'>
+                        <button htmlType="submit" className='w-full primary-btn'>
                             Create an account
-                        </Button>
+                        </button>
                     </Form.Item>
                     <hr className='p-2'></hr>
 
                     <div className='flex justify-between items-center'>
                         <span> Already have account?</span>
-                        <Link to="/sign-in"><Button>Sign in</Button></Link>
+                        <Link to="/sign-in"><button className='primary-btn'>Sign in</button></Link>
                     </div>
                 </Form>
             </div>

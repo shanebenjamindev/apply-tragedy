@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter, Routes } from 'react-router-dom'
 import renderRoutes from './routes'
