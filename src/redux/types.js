@@ -16,3 +16,5 @@ export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNIN_FAIL = 'SIGNIN_FAIL';
 
 export const STATUS_REQUEST = 'STATUS_REQUEST';
+
+export const USER_UPDATE = 'USER_UPDATE';

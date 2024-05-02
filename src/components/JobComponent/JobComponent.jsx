@@ -83,62 +83,52 @@ export default function JobComponent({ user, listJob }) {
 
     return (
         <div>
-            {listJob ?
-                <div className='md:w-10/12 m-auto flex-col gap-30'>
-                    <div className='md:flex gap-10 w-full'>
-                        <div className='md:w-5/12'>
-                            <Form form={form} onFinish={onSubmitJob} layout="">
-                                <Form.Item name="position" rules={[{ required: true, message: 'Please input position!' }]}>
-                                    <Input placeholder="Position" />
-                                </Form.Item>
-                                <Form.Item name="company" rules={[{ required: true, message: 'Please input company!' }]}>
-                                    <Input placeholder="Company" />
-                                </Form.Item>
-                                <Form.Item name="status" rules={[{ required: true, message: 'Please select status!' }]}>
-                                    <Select placeholder="Status">
-                                        <Option value="Bookmarked">Bookmarked</Option>
-                                        <Option value="Applying">Applying</Option>
-                                        <Option value="Interview">Interview</Option>
-                                        <Option value="Pending">Pending</Option>
-                                        <Option value="Accepted">Accepted</Option>
-                                        <Option value="Closed">Closed</Option>
-                                    </Select>
-                                </Form.Item>
-                                <Form.Item name="address" rules={[{ required: true, message: 'Please input address!' }]}>
-                                    <Input placeholder="Address" />
-                                </Form.Item>
+            <div className='md:w-10/12 m-auto flex-col gap-30'>
+                <div className='md:flex gap-10 w-full'>
+                    <div className='md:w-5/12'>
+                        <Form form={form} onFinish={onSubmitJob} layout="">
+                            <Form.Item name="position" rules={[{ required: true, message: 'Please input position!' }]}>
+                                <Input placeholder="Position" />
+                            </Form.Item>
+                            <Form.Item name="company" rules={[{ required: true, message: 'Please input company!' }]}>
+                                <Input placeholder="Company" />
+                            </Form.Item>
+                            <Form.Item name="status" rules={[{ required: true, message: 'Please select status!' }]}>
+                                <Select placeholder="Status">
+                                    <Option value="Bookmarked">Bookmarked</Option>
+                                    <Option value="Applying">Applying</Option>
+                                    <Option value="Interview">Interview</Option>
+                                    <Option value="Pending">Pending</Option>
+                                    <Option value="Accepted">Accepted</Option>
+                                    <Option value="Closed">Closed</Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="address" rules={[{ required: true, message: 'Please input address!' }]}>
+                                <Input placeholder="Address" />
+                            </Form.Item>
 
-                                <Form.Item name="user" style={{ display: 'none' }} >
-                                    <Input placeholder="User" value={userId} type="hidden" />
-                                </Form.Item>
+                            <Form.Item name="user" style={{ display: 'none' }} >
+                                <Input placeholder="User" value={userId} type="hidden" />
+                            </Form.Item>
 
-                                <Form.Item name="url" rules={[{ required: true, message: 'Please input URL!' }]}>
-                                    <Input placeholder="URL" />
-                                </Form.Item>
-                                <Form.Item>
-                                    <Button type="primary" htmlType="submit">
-                                        Add Job
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </div>
-
-                        <div className='md:w-7/12'>
-                            {listJob ? (
-                                <div style={{ overflow: "auto" }}>
-                                    <Table dataSource={listJob} columns={columns} className='text-center' rowKey={"_id"} />
-                                </div>
-
-                            ) : (
-                                <Loading />
-                            )
-                            }
-                        </div>
+                            <Form.Item name="url" rules={[{ required: true, message: 'Please input URL!' }]}>
+                                <Input placeholder="URL" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    Add Job
+                                </Button>
+                            </Form.Item>
+                        </Form>
                     </div>
 
-
+                    <div className='md:w-7/12'>
+                        <div style={{ overflow: "auto" }}>
+                            <Table dataSource={listJob} columns={columns} className='text-center' rowKey={"_id"} />
+                        </div>
+                    </div>
                 </div>
-                : <>Chưa có dữ liệu</>}
+            </div>
 
         </div>
     );

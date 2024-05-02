@@ -8,6 +8,7 @@ import { GetUser } from '../../../hooks/userHooks';
 const { Title } = Typography;
 
 export default function SignUp() {
+    
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -76,7 +77,7 @@ export default function SignUp() {
                         <Input.Password placeholder="Confirm Password" />
                     </Form.Item>
                     <Form.Item>
-                        <button htmlType="submit" className='w-full primary-btn'>
+                        <button type="submit" className='w-full primary-btn'>
                             Create an account
                         </button>
                     </Form.Item>

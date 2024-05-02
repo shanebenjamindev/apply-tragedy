@@ -1,15 +1,18 @@
-import { GoogleCircleFilled } from '@ant-design/icons';
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
-import { Button } from 'antd';
+// import { GoogleCircleFilled } from '@ant-design/icons';
+// import { useGoogleLogin } from '@react-oauth/google';
+// import axios from 'axios';
+// import { useDispatch } from 'react-redux';
+// import { actSignUp, actUpdateUser } from '../../redux/action';
+// import { useEffect, useState } from 'react';
+// import { SetLocalUser } from '../../hooks/userHooks';
 
-export default function GoogleLoginButton() {
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
-    });
+// export default function GoogleLoginButton() {
 
-    return (
-        <button className='primary-btn' onClick={() => login()}>
-            <GoogleCircleFilled />  Sign in with Google
-        </button>
-    )
-}
+//     const dispatch = useDispatch()
+
+//     const newUser = handleLogin()
+//     console.log(newUser);
+//     return (
+       
+//     )
+// }

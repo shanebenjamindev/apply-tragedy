@@ -8,7 +8,6 @@ import { useMessageError, useMessageSuccess } from '../../../components/Message/
 import { GetUser } from '../../../hooks/userHooks';
 
 const { Title } = Typography;
-import GoogleLoginButton from '../../../components/LoginWithGoogle/LoginWithGoogle';
 export default function Login() {
     const [form] = Form.useForm();
     const navigate = useNavigate()
@@ -46,7 +45,8 @@ export default function Login() {
                 layout='vertical'
             >
                 <h2 className='form-title my-5' >Login</h2>
-
+                <Form.Item>
+                </Form.Item>
                 <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
@@ -61,20 +61,14 @@ export default function Login() {
                     <Input.Password placeholder="Password" />
                 </Form.Item>
                 <Form.Item>
-                    <button htmlType="submit" className='w-full primary-btn-reverse'>
+                    <button type="submit" className='w-full primary-btn-reverse'>
                         Login
                     </button>
                 </Form.Item>
                 <hr className='p-2'></hr>
-                <div className='flex justify-center text-center'>
-                    <div>
-                        <span >or</span>
-                        <GoogleLoginButton />
-                    </div>
-                </div>
-                <div className='flex justify-between items-center my-2'>
+                <div className='flex justify-between '>
                     <span> Dont have account?</span>
-                    <Link to="/sign-up"><button className='primary-btn'>Sign up</button></Link>
+                    <Link to="/sign-up"><Button>Sign up</Button></Link>
                 </div>
             </Form>
         </section>

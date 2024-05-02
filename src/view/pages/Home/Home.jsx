@@ -41,7 +41,6 @@ export default function Home() {
     return (
         <main className='home-container'>
             <div className='bg'>
-                {/* <Note note={open} setOpen={setOpen} /> */}
                 {user ?
                     <section className='bg-white z-30'>
                         <h1 className='main-title'>Welcome, {user?.userData.lastName || "User"}</h1>

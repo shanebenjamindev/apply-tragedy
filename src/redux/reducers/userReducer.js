@@ -17,6 +17,14 @@ const userReducer = (state = initialState, action) => {
             state.error = null;
             return { ...state }
 
+        case actions.USER_UPDATE:
+            state.loading = true;
+            state.data = action.payload
+            // console.log(data.payload);
+            SetLocalUser(state.data)
+            state.error = null;
+            return { ...state }
+
         case actions.SIGNUP_SUCCESS:
             state.loading = false;
             useMessageSuccess(`SIGN UP` + "" + action.payload)
